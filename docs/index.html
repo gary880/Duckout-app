@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duckout 快逃鴨 — 一鍵產生完美藉口</title>
+    <meta name="description" content="Duckout 快逃鴨，幫你在各種社交場合快速產生完美藉口。職場、社交、家庭、感情、通用，230+ 個理由隨你挑。">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --duck-yellow: #FFE176;
+            --coral-red: #FF8C7C;
+            --mint-green: #7EC8B8;
+            --outline: #2B3A4E;
+            --background: #FDF6EC;
+            --card-bg: #FFFDF7;
+            --secondary-text: #8A9BAE;
+            --romance-pink: #F2A7B3;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background: var(--background);
+            color: var(--outline);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 48px;
+            position: relative;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            border: 3px solid var(--outline);
+            box-shadow: 4px 4px 0 var(--outline);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+
+        .hero .subtitle {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--secondary-text);
+            margin-bottom: 16px;
+        }
+
+        .hero .tagline {
+            font-size: 18px;
+            color: var(--secondary-text);
+            max-width: 460px;
+            margin: 0 auto 32px;
+        }
+
+        .app-store-btn {
+            display: inline-block;
+            background: var(--outline);
+            color: #fff;
+            font-size: 17px;
+            font-weight: 600;
+            padding: 14px 36px;
+            border-radius: 14px;
+            border: 3px solid var(--outline);
+            box-shadow: 4px 4px 0 var(--outline);
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .app-store-btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--outline);
+        }
+
+        /* Duck parade */
+        .duck-parade {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 32px 24px;
+            flex-wrap: wrap;
+        }
+
+        .duck-parade img {
+            width: 56px;
+            height: 56px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .duck-parade img:hover {
+            transform: scale(1.3) rotate(-8deg);
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 32px 24px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            color: var(--secondary-text);
+            font-weight: 500;
+        }
+
+        /* Section */
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--secondary-text);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Category cards */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border: 3px solid var(--outline);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 4px 4px 0 var(--outline);
+            transition: all 0.15s ease;
+        }
+
+        .category-card:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--outline);
+        }
+
+
+        .category-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin-bottom: 12px;
+        }
+
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 8px;
+            border: 2px solid var(--outline);
+            font-weight: 500;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 3px solid var(--outline);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 4px 4px 0 var(--outline);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .feature-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--secondary-text);
+        }
+
+        /* Demo card */
+        .demo-section {
+            text-align: center;
+        }
+
+        .demo-card {
+            background: var(--card-bg);
+            border: 3px solid var(--outline);
+            border-radius: 18px;
+            padding: 28px 24px;
+            box-shadow: 4px 4px 0 var(--outline);
+            max-width: 440px;
+            min-height: 280px;
+            margin: 0 auto 16px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .demo-excuse {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .demo-message {
+            background: var(--background);
+            border: 2px solid var(--outline);
+            border-radius: 14px;
+            padding: 14px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--outline);
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .demo-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-badge {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 8px;
+            color: #fff;
+        }
+
+        .demo-scenario {
+            font-size: 13px;
+            color: var(--secondary-text);
+        }
+
+        .demo-btn {
+            display: inline-block;
+            background: var(--duck-yellow);
+            color: var(--outline);
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 12px;
+            border: 3px solid var(--outline);
+            box-shadow: 3px 3px 0 var(--outline);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .demo-btn:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0 var(--outline);
+        }
+
+        .demo-duck {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Credibility */
+        .cred-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .cred-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--card-bg);
+            border: 3px solid var(--outline);
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: 4px 4px 0 var(--outline);
+        }
+
+        .cred-badge {
+            flex-shrink: 0;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .cred-text {
+            font-size: 15px;
+            color: var(--secondary-text);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--secondary-text);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--outline);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            margin: 0 12px;
+        }
+
+        .footer-duck {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 36px; }
+            .hero .subtitle { font-size: 18px; }
+            .hero .tagline { font-size: 16px; }
+            .section-title { font-size: 26px; }
+            .stats { gap: 24px; }
+            .stat-number { font-size: 32px; }
+            .duck-parade img:nth-child(n+6) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <img src="images/duckout_happy_logo.png" alt="Duckout Logo" class="hero-logo">
+    <h1>Duckout</h1>
+    <p class="subtitle">快逃鴨</p>
+    <p class="tagline">不想加班？不想聚餐？不想約會？<br>一鍵產生完美藉口，優雅脫身</p>
+    <a href="#" class="app-store-btn">App Store 即將上架</a>
+</div>
+
+<!-- Duck parade -->
+<div class="duck-parade">
+    <img src="images/duck_happy.png" alt="開心鴨">
+    <img src="images/duck_excited.png" alt="興奮鴨">
+    <img src="images/duck_wink.png" alt="眨眼鴨">
+    <img src="images/duck_serious.png" alt="認真鴨">
+    <img src="images/duck_question.png" alt="疑問鴨">
+    <img src="images/duck_shock.png" alt="驚嚇鴨">
+    <img src="images/duck_cry.png" alt="哭泣鴨">
+    <img src="images/duck_unhappy.png" alt="不開心鴨">
+    <img src="images/duck_sleep.png" alt="睡覺鴨">
+</div>
+
+<!-- Stats -->
+<div class="stats">
+    <div class="stat">
+        <div class="stat-number">234</div>
+        <div class="stat-label">個精心設計的藉口</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">5</div>
+        <div class="stat-label">大情境分類</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">19</div>
+        <div class="stat-label">種場景</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">3</div>
+        <div class="stat-label">段可信度等級</div>
+    </div>
+</div>
+
+<!-- Categories -->
+<section>
+    <h2 class="section-title">五大情境分類</h2>
+    <p class="section-subtitle">不管什麼場合，都有對應的脫身理由</p>
+
+    <div class="categories">
+        <div class="category-card">
+
+            <div class="category-name" style="color: var(--mint-green);">職場篇</div>
+            <div class="category-count">62 個藉口</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--mint-green); color: #fff;">不想加班</span>
+                <span class="tag" style="background: var(--card-bg);">跳過會議</span>
+                <span class="tag" style="background: var(--card-bg);">回絕團購</span>
+            </div>
+        </div>
+        <div class="category-card">
+
+            <div class="category-name" style="color: var(--duck-yellow);">社交篇</div>
+            <div class="category-count">51 個藉口</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--duck-yellow);">拒絕聚餐</span>
+                <span class="tag" style="background: var(--card-bg);">不想出門</span>
+                <span class="tag" style="background: var(--card-bg);">拒絕卡拉OK</span>
+            </div>
+        </div>
+        <div class="category-card">
+
+            <div class="category-name" style="color: var(--coral-red);">家庭篇</div>
+            <div class="category-count">40 個藉口</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--coral-red); color: #fff;">逃避親戚聚會</span>
+                <span class="tag" style="background: var(--card-bg);">不想回老家</span>
+            </div>
+        </div>
+        <div class="category-card">
+
+            <div class="category-name" style="color: var(--romance-pink);">感情篇</div>
+            <div class="category-count">41 個藉口</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--romance-pink); color: #fff;">取消約會</span>
+                <span class="tag" style="background: var(--card-bg);">婉拒相親</span>
+            </div>
+        </div>
+        <div class="category-card">
+
+            <div class="category-name" style="color: var(--secondary-text);">通用篇</div>
+            <div class="category-count">40 個藉口</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--secondary-text); color: #fff;">遲到理由</span>
+                <span class="tag" style="background: var(--card-bg);">忘記回訊息</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Credibility -->
+<section>
+    <h2 class="section-title">三段可信度</h2>
+    <p class="section-subtitle">從正經八百到鬼扯連篇，看你需要哪一種</p>
+
+    <div class="cred-list">
+        <div class="cred-row">
+            <span class="cred-badge" style="background: var(--mint-green);">合情合理</span>
+            <span class="cred-text">正當理由，老闆主管都會買單</span>
+        </div>
+        <div class="cred-row">
+            <span class="cred-badge" style="background: var(--duck-yellow); color: var(--outline);">有點烤鴨</span>
+            <span class="cred-text">半信半疑，但不太好追問</span>
+        </div>
+        <div class="cred-row">
+            <span class="cred-badge" style="background: var(--coral-red);">超級烤鴨</span>
+            <span class="cred-text">荒謬但有趣，笑著就原諒了</span>
+        </div>
+    </div>
+</section>
+
+<!-- Demo -->
+<section class="demo-section">
+    <h2 class="section-title">試試看</h2>
+    <p class="section-subtitle">點一下，隨機產生藉口</p>
+
+    <img id="demoDuck" class="demo-duck" src="images/duck_happy.png" alt="鴨">
+
+    <div class="demo-card" id="demoCard">
+        <div class="demo-excuse" id="demoExcuse">我家的掃地機器人傳了緊急通知說它卡住了，我得回去救它</div>
+        <div class="demo-message" id="demoMessage">欸不行我要先走了，我家掃地機器人剛傳通知說它卡在沙發底下出不來，上次卡了一整晚隔天電池就壞了，我得回去救它！</div>
+        <div class="demo-meta">
+            <span class="demo-badge" id="demoBadge" style="background: var(--coral-red);">超級烤鴨</span>
+            <span class="demo-scenario" id="demoScenario">不想加班</span>
+        </div>
+    </div>
+
+    <button class="demo-btn" id="demoBtn" onclick="randomExcuse()">🎲 換一個藉口</button>
+</section>
+
+<!-- Features -->
+<section>
+    <h2 class="section-title">功能特色</h2>
+    <p class="section-subtitle">不只給你藉口，還幫你把話說好</p>
+
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <div class="feature-title">一鍵複製</div>
+            <div class="feature-desc">藉口和訊息範本都能一鍵複製，直接貼到聊天室</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎲</div>
+            <div class="feature-title">隨機產生</div>
+            <div class="feature-desc">選不出來？讓命運之鴨幫你決定</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">❤️</div>
+            <div class="feature-title">收藏最愛</div>
+            <div class="feature-desc">把好用的藉口收藏起來，下次直接用</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🖼️</div>
+            <div class="feature-title">分享圖卡</div>
+            <div class="feature-desc">生成精美藉口圖卡，分享到社群</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <div class="feature-title">藉口日曆</div>
+            <div class="feature-desc">記錄你用過的藉口，避免重複使用被抓包</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">完全離線</div>
+            <div class="feature-desc">不需要網路，不收集任何資料，你的秘密只有你知道</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align: center;">
+    <img src="images/duck_wink.png" alt="鴨" style="width: 80px; height: 80px; margin-bottom: 16px;">
+    <h2 class="section-title">準備好逃了嗎？</h2>
+    <p class="section-subtitle">下載 Duckout，讓每次脫身都優雅從容</p>
+    <a href="#" class="app-store-btn">App Store 即將上架</a>
+</section>
+
+<!-- Footer -->
+<footer>
+    <img src="images/duck_sleep.png" alt="鴨" class="footer-duck">
+    <div class="footer-links">
+        <a href="privacy-policy.html">隱私權政策</a>
+        <a href="terms-of-service.html">服務條款</a>
+    </div>
+    <p>&copy; 2026 Duckout 快逃鴨. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 12px;">本 App 所有藉口僅供娛樂用途，請勿用於不當目的</p>
+</footer>
+
+<script>
+const excuses = [
+    { excuse: "我家的掃地機器人傳了緊急通知說它卡住了，我得回去救它", message: "欸不行我要先走了，我家掃地機器人剛傳通知說它卡在沙發底下出不來，上次卡了一整晚隔天電池就壞了，我得回去救它！", cred: 3, scenario: "不想加班" },
+    { excuse: "抱歉今天沒辦法加班，我預約了牙醫回診，已經改過兩次了不能再改了", message: "主管不好意思 🙏 今天真的沒辦法留下來加班，我預約了牙醫回診，已經改過兩次了，明天我會早點來把進度補上！", cred: 1, scenario: "不想加班" },
+    { excuse: "不好意思今天身體不太舒服，可能是昨天吃壞肚子了，改天再約", message: "抱歉今天晚上去不了了 🙏 我從下午開始肚子就不太舒服，可能昨天吃到不乾淨的東西，改天身體好了再約！", cred: 1, scenario: "拒絕聚餐" },
+    { excuse: "我手機剛掉到馬桶裡，現在在用吹風機吹乾中", message: "天啊我手機剛掉馬桶裡了 😱 現在在用吹風機吹，觸控有點不靈敏，晚點再回你們！！", cred: 2, scenario: "逃離群組" },
+    { excuse: "公司臨時安排我這週末值班，真的走不開", message: "阿姨不好意思 🙏 公司臨時安排我這週末要值班，主管特別點名要我在，實在沒辦法請假，下次聚會一定到！", cred: 1, scenario: "逃避親戚聚會" },
+    { excuse: "最近工作壓力好大，想一個人靜一靜，不是不想見你", message: "不好意思我最近狀態不太好 😔 工作壓力有點大，想自己安靜一下充充電，不是不想見你，等我調整好再約好嗎？", cred: 1, scenario: "拒絕約會" },
+    { excuse: "路上出了車禍在塞車，不是我出的但整條路都動不了", message: "不好意思我會晚到 🙏 前面有車禍整條路都在塞，完全動不了 🚗 大概還要15-20分鐘，真的很抱歉！", cred: 1, scenario: "遲到理由" },
+    { excuse: "尾牙那天我家貓預約了結紮手術，必須在旁邊顧著", message: "抱歉啊，尾牙我去不了了 🙏 我家貓那天要動手術，醫生說術後需要有人顧著，祝大家玩得開心！", cred: 1, scenario: "拒絕尾牙" },
+    { excuse: "我最近在執行168斷食計畫，下午四點以後不能吃東西", message: "謝謝揪團～但我最近在試168斷食，下午四點後不能吃，這次先pass，下次有早上的團購再叫我！", cred: 2, scenario: "回絕團購" },
+    { excuse: "我剛在IG上算了塔羅牌，牌卡說我今天不適合跟任何人有曖昧互動，不然會水逆", message: "欸我跟你說一件超離譜的事 😂 我剛抽塔羅牌，牌說我今天跟人曖昧會招水逆，我怕爆，今天先不出門了！", cred: 3, scenario: "婉拒曖昧對象" },
+    { excuse: "我上次團購吃了之後做了一個被食物追殺的惡夢，現在看到團購單就會PTSD", message: "不要找我 😂 上次團購的千層蛋糕，我吃完當天夢到被巨大蛋糕追著跑，現在看到團購單就會抖，你們買就好！", cred: 3, scenario: "回絕團購" },
+    { excuse: "我鄰居家的管線漏水滲到我家，師傅說今天一定要進我家檢查牆壁，不然樓下會告我", message: "主管不好意思 🙏 我家天花板在漏水，樓上鄰居約了水電師傅現在要來看，我得趕回去處理，不然怕淹到木地板，明天補進度！", cred: 2, scenario: "不想加班" },
+];
+
+const duckImages = [
+    "images/duck_happy.png", "images/duck_excited.png", "images/duck_wink.png",
+    "images/duck_serious.png", "images/duck_question.png", "images/duck_shock.png",
+    "images/duck_cry.png", "images/duck_unhappy.png"
+];
+
+const credMap = {
+    1: { label: "合情合理", color: "var(--mint-green)" },
+    2: { label: "有點烤鴨", color: "var(--duck-yellow)" },
+    3: { label: "超級烤鴨", color: "var(--coral-red)" }
+};
+
+function randomExcuse() {
+    const e = excuses[Math.floor(Math.random() * excuses.length)];
+    const c = credMap[e.cred];
+
+    document.getElementById("demoExcuse").textContent = e.excuse;
+    document.getElementById("demoMessage").textContent = e.message;
+    document.getElementById("demoBadge").textContent = c.label;
+    document.getElementById("demoBadge").style.background = c.color;
+    document.getElementById("demoBadge").style.color = e.cred === 2 ? "var(--outline)" : "#fff";
+    document.getElementById("demoScenario").textContent = e.scenario;
+
+    const duck = duckImages[Math.floor(Math.random() * duckImages.length)];
+    const duckEl = document.getElementById("demoDuck");
+    duckEl.src = duck;
+    duckEl.style.transform = "scale(1.2) rotate(-10deg)";
+    setTimeout(() => { duckEl.style.transform = "scale(1) rotate(0)"; }, 300);
+}
+</script>
+
+</body>
+</html>
