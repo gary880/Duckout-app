@@ -33,77 +33,135 @@
         .contact-box p { margin-bottom: 6px; }
         .faq-q { font-weight: 600; color: #2b3a4e; margin-bottom: 4px; }
         .faq-a { color: #5a6a7e; margin-bottom: 16px; }
+        .lang-switch {
+            display: flex;
+            gap: 0;
+            margin-bottom: 24px;
+        }
+        .lang-btn {
+            padding: 8px 20px;
+            border: 2px solid #2b3a4e;
+            background: transparent;
+            color: #2b3a4e;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .lang-btn:first-child {
+            border-radius: 8px 0 0 8px;
+            border-right: 1px solid #2b3a4e;
+        }
+        .lang-btn:last-child {
+            border-radius: 0 8px 8px 0;
+            border-left: 1px solid #2b3a4e;
+        }
+        .lang-btn.active {
+            background: #2b3a4e;
+            color: #fff8f0;
+        }
+        .lang-section { display: none; }
+        .lang-section.active { display: block; }
     </style>
 </head>
 <body>
 
-<h1>支援中心</h1>
-<p class="subtitle">Duckout 快逃鴨</p>
-
-<div class="contact-box">
-    <p><strong>有任何問題或建議？歡迎來信：</strong></p>
-    <p><a href="mailto:duckout@pairspot.tw">duckout@pairspot.tw</a></p>
-    <p style="font-size: 13px; color: #8a9ab0;">我們會盡快在 1-2 個工作天內回覆您</p>
+<div class="lang-switch">
+    <button class="lang-btn active" onclick="switchLang('zh')">中文</button>
+    <button class="lang-btn" onclick="switchLang('en')">English</button>
 </div>
 
-<h2>常見問題</h2>
+<div id="lang-zh" class="lang-section active">
+    <h1>支援中心</h1>
+    <p class="subtitle">Duckout 快逃鴨</p>
 
-<h3 class="faq-q">Q：Duckout 會收集我的個人資料嗎？</h3>
-<p class="faq-a">不會。Duckout 所有資料都儲存在您的裝置本機，不會上傳至任何伺服器，也不需要建立帳號。</p>
+    <div class="contact-box">
+        <p><strong>有任何問題或建議？歡迎來信：</strong></p>
+        <p><a href="mailto:duckout@pairspot.tw">duckout@pairspot.tw</a></p>
+        <p style="font-size: 13px; color: #8a9ab0;">我們會盡快在 1-2 個工作天內回覆您</p>
+    </div>
 
-<h3 class="faq-q">Q：需要網路才能使用嗎？</h3>
-<p class="faq-a">不需要。所有藉口內容都內建在 App 中，完全離線即可使用。</p>
+    <h2>常見問題</h2>
 
-<h3 class="faq-q">Q：如何恢復已購買的內容？</h3>
-<p class="faq-a">前往 App 內的設定頁面，點擊「恢復購買」即可透過您的 Apple ID 恢復先前的購買紀錄。</p>
+    <h3 class="faq-q">Q：Duckout 會收集我的個人資料嗎？</h3>
+    <p class="faq-a">不會。Duckout 所有資料都儲存在您的裝置本機，不會上傳至任何伺服器，也不需要建立帳號。</p>
 
-<h3 class="faq-q">Q：我的收藏和日曆紀錄會同步到其他裝置嗎？</h3>
-<p class="faq-a">目前資料僅儲存在本機裝置，暫不支援跨裝置同步。刪除 App 將會清除所有本機資料。</p>
+    <h3 class="faq-q">Q：需要網路才能使用嗎？</h3>
+    <p class="faq-a">不需要。所有藉口內容都內建在 App 中，完全離線即可使用。</p>
 
-<h3 class="faq-q">Q：模擬來電功能會真的撥打電話嗎？</h3>
-<p class="faq-a">不會。模擬來電僅為畫面與聲音模擬，不會產生任何真實通話或費用。</p>
+    <h3 class="faq-q">Q：如何恢復已購買的內容？</h3>
+    <p class="faq-a">前往 App 內的設定頁面，點擊「恢復購買」即可透過您的 Apple ID 恢復先前的購買紀錄。</p>
 
-<h3 class="faq-q">Q：App 適合什麼年齡使用？</h3>
-<p class="faq-a">Duckout 的內容分級為 13+，建議 13 歲以上使用。所有藉口僅供娛樂用途。</p>
+    <h3 class="faq-q">Q：我的收藏和日曆紀錄會同步到其他裝置嗎？</h3>
+    <p class="faq-a">目前資料僅儲存在本機裝置，暫不支援跨裝置同步。刪除 App 將會清除所有本機資料。</p>
 
-<hr>
+    <h3 class="faq-q">Q：模擬來電功能會真的撥打電話嗎？</h3>
+    <p class="faq-a">不會。模擬來電僅為畫面與聲音模擬，不會產生任何真實通話或費用。</p>
 
-<h1>Support</h1>
-<p class="subtitle">Duckout</p>
+    <h3 class="faq-q">Q：App 適合什麼年齡使用？</h3>
+    <p class="faq-a">Duckout 的內容分級為 13+，建議 13 歲以上使用。所有藉口僅供娛樂用途。</p>
 
-<div class="contact-box">
-    <p><strong>Have questions or feedback? Reach out to us:</strong></p>
-    <p><a href="mailto:duckout@pairspot.tw">duckout@pairspot.tw</a></p>
-    <p style="font-size: 13px; color: #8a9ab0;">We'll do our best to respond within 1-2 business days</p>
+    <hr>
+
+    <h2>其他連結</h2>
+    <p>
+        <a href="privacy-policy.html">隱私權政策</a><br>
+        <a href="terms-of-service.html">服務條款</a>
+    </p>
 </div>
 
-<h2>FAQ</h2>
+<div id="lang-en" class="lang-section">
+    <h1>Support</h1>
+    <p class="subtitle">Duckout</p>
 
-<h3 class="faq-q">Q: Does Duckout collect my personal data?</h3>
-<p class="faq-a">No. All data is stored locally on your device. Nothing is uploaded to any server, and no account creation is required.</p>
+    <div class="contact-box">
+        <p><strong>Have questions or feedback? Reach out to us:</strong></p>
+        <p><a href="mailto:duckout@pairspot.tw">duckout@pairspot.tw</a></p>
+        <p style="font-size: 13px; color: #8a9ab0;">We'll do our best to respond within 1-2 business days</p>
+    </div>
 
-<h3 class="faq-q">Q: Do I need internet to use the app?</h3>
-<p class="faq-a">No. All excuse content is built into the app and works completely offline.</p>
+    <h2>FAQ</h2>
 
-<h3 class="faq-q">Q: How do I restore my purchases?</h3>
-<p class="faq-a">Go to the Settings page in the app and tap "Restore Purchases" to recover previous purchases via your Apple ID.</p>
+    <h3 class="faq-q">Q: Does Duckout collect my personal data?</h3>
+    <p class="faq-a">No. All data is stored locally on your device. Nothing is uploaded to any server, and no account creation is required.</p>
 
-<h3 class="faq-q">Q: Will my favorites and calendar sync across devices?</h3>
-<p class="faq-a">Currently, data is stored locally only and does not sync across devices. Deleting the app will erase all local data.</p>
+    <h3 class="faq-q">Q: Do I need internet to use the app?</h3>
+    <p class="faq-a">No. All excuse content is built into the app and works completely offline.</p>
 
-<h3 class="faq-q">Q: Does the fake call feature make real phone calls?</h3>
-<p class="faq-a">No. The fake call feature only simulates a call screen and sound. It does not initiate any real calls or incur any charges.</p>
+    <h3 class="faq-q">Q: How do I restore my purchases?</h3>
+    <p class="faq-a">Go to the Settings page in the app and tap "Restore Purchases" to recover previous purchases via your Apple ID.</p>
 
-<h3 class="faq-q">Q: What age group is this app for?</h3>
-<p class="faq-a">Duckout is rated 13+ and recommended for ages 13 and above. All excuses are intended for entertainment purposes only.</p>
+    <h3 class="faq-q">Q: Will my favorites and calendar sync across devices?</h3>
+    <p class="faq-a">Currently, data is stored locally only and does not sync across devices. Deleting the app will erase all local data.</p>
 
-<hr>
+    <h3 class="faq-q">Q: Does the fake call feature make real phone calls?</h3>
+    <p class="faq-a">No. The fake call feature only simulates a call screen and sound. It does not initiate any real calls or incur any charges.</p>
 
-<h2>其他連結 / Links</h2>
-<p>
-    <a href="privacy-policy.html">隱私權政策 / Privacy Policy</a><br>
-    <a href="terms-of-service.html">服務條款 / Terms of Service</a>
-</p>
+    <h3 class="faq-q">Q: What age group is this app for?</h3>
+    <p class="faq-a">Duckout is rated 13+ and recommended for ages 13 and above. All excuses are intended for entertainment purposes only.</p>
+
+    <hr>
+
+    <h2>Links</h2>
+    <p>
+        <a href="privacy-policy.html">Privacy Policy</a><br>
+        <a href="terms-of-service.html">Terms of Service</a>
+    </p>
+</div>
+
+<script>
+    function switchLang(lang) {
+        document.querySelectorAll('.lang-section').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        document.querySelectorAll('.lang-btn').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        document.getElementById('lang-' + lang).classList.add('active');
+        document.querySelector('.lang-btn[onclick="switchLang(\'' + lang + '\')"]').classList.add('active');
+        document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+    }
+</script>
 
 </body>
 </html>
