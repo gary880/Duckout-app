@@ -33,17 +33,29 @@
         .contact-box p { margin-bottom: 6px; }
         .faq-q { font-weight: 600; color: #2b3a4e; margin-bottom: 4px; }
         .faq-a { color: #5a6a7e; margin-bottom: 16px; }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .back-link {
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #2b3a4e;
+        }
+        .back-link:hover { text-decoration: underline; }
         .lang-switch {
             display: flex;
             gap: 0;
-            margin-bottom: 24px;
         }
         .lang-btn {
-            padding: 8px 20px;
+            padding: 6px 16px;
             border: 2px solid #2b3a4e;
             background: transparent;
             color: #2b3a4e;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
@@ -62,13 +74,26 @@
         }
         .lang-section { display: none; }
         .lang-section.active { display: block; }
+        .nav-links {
+            margin-top: 16px;
+            font-size: 14px;
+        }
+        .nav-links a {
+            margin-right: 16px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .nav-links a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-<div class="lang-switch">
-    <button class="lang-btn active" onclick="switchLang('zh')">中文</button>
-    <button class="lang-btn" onclick="switchLang('en')">English</button>
+<div class="top-bar">
+    <a href="index.html" class="back-link" id="back-link">&larr; Duckout</a>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="switchLang('zh')">中文</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+    </div>
 </div>
 
 <div id="lang-zh" class="lang-section active">
@@ -103,11 +128,10 @@
 
     <hr>
 
-    <h2>其他連結</h2>
-    <p>
-        <a href="privacy-policy.html">隱私權政策</a><br>
-        <a href="terms-of-service.html">服務條款</a>
-    </p>
+    <div class="nav-links">
+        <a href="privacy-policy.html?lang=zh">隱私權政策</a>
+        <a href="terms-of-service.html?lang=zh">服務條款</a>
+    </div>
 </div>
 
 <div id="lang-en" class="lang-section">
@@ -142,25 +166,37 @@
 
     <hr>
 
-    <h2>Links</h2>
-    <p>
-        <a href="privacy-policy.html">Privacy Policy</a><br>
-        <a href="terms-of-service.html">Terms of Service</a>
-    </p>
+    <div class="nav-links">
+        <a href="privacy-policy.html?lang=en">Privacy Policy</a>
+        <a href="terms-of-service.html?lang=en">Terms of Service</a>
+    </div>
 </div>
 
 <script>
-    function switchLang(lang) {
-        document.querySelectorAll('.lang-section').forEach(function(el) {
-            el.classList.remove('active');
-        });
-        document.querySelectorAll('.lang-btn').forEach(function(el) {
-            el.classList.remove('active');
-        });
-        document.getElementById('lang-' + lang).classList.add('active');
-        document.querySelector('.lang-btn[onclick="switchLang(\'' + lang + '\')"]').classList.add('active');
-        document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+    function getLang() {
+        var params = new URLSearchParams(window.location.search);
+        return params.get('lang') || 'zh';
     }
+
+    function switchLang(lang) {
+        document.querySelectorAll('.lang-section').forEach(function(el) { el.classList.remove('active'); });
+        document.querySelectorAll('.lang-btn').forEach(function(el) { el.classList.remove('active'); });
+        document.getElementById('lang-' + lang).classList.add('active');
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            if (btn.getAttribute('onclick') === "switchLang('" + lang + "')") btn.classList.add('active');
+        });
+        document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+        document.getElementById('back-link').href = 'index.html?lang=' + lang;
+        var url = new URL(window.location);
+        url.searchParams.set('lang', lang);
+        history.replaceState(null, '', url);
+    }
+
+    (function() {
+        var lang = getLang();
+        if (lang === 'en') switchLang('en');
+        else switchLang('zh');
+    })();
 </script>
 
 </body>

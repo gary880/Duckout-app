@@ -27,10 +27,53 @@
             overflow-x: hidden;
         }
 
+        /* Language switch */
+        .lang-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 16px 24px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0;
+        }
+
+        .lang-btn {
+            padding: 6px 16px;
+            border: 2px solid var(--outline);
+            background: transparent;
+            color: var(--outline);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-btn:first-child {
+            border-radius: 8px 0 0 8px;
+            border-right: 1px solid var(--outline);
+        }
+
+        .lang-btn:last-child {
+            border-radius: 0 8px 8px 0;
+            border-left: 1px solid var(--outline);
+        }
+
+        .lang-btn.active {
+            background: var(--outline);
+            color: var(--background);
+        }
+
+        .lang-section { display: none; }
+        .lang-section.active { display: block; }
+
         /* Hero */
         .hero {
             text-align: center;
-            padding: 80px 24px 48px;
+            padding: 48px 24px 48px;
             position: relative;
         }
 
@@ -393,6 +436,17 @@
 </head>
 <body>
 
+<!-- Language Switch -->
+<div class="lang-bar">
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="switchLang('zh')">中文</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+    </div>
+</div>
+
+<!-- ===== 中文版 ===== -->
+<div id="lang-zh" class="lang-section active">
+
 <!-- Hero -->
 <div class="hero">
     <img src="images/duckout_happy_logo.png" alt="Duckout Logo" class="hero-logo">
@@ -442,7 +496,6 @@
 
     <div class="categories">
         <div class="category-card">
-
             <div class="category-name" style="color: var(--mint-green);">職場篇</div>
             <div class="category-count">62 個藉口</div>
             <div class="category-tags">
@@ -452,7 +505,6 @@
             </div>
         </div>
         <div class="category-card">
-
             <div class="category-name" style="color: var(--duck-yellow);">社交篇</div>
             <div class="category-count">51 個藉口</div>
             <div class="category-tags">
@@ -462,7 +514,6 @@
             </div>
         </div>
         <div class="category-card">
-
             <div class="category-name" style="color: var(--coral-red);">家庭篇</div>
             <div class="category-count">40 個藉口</div>
             <div class="category-tags">
@@ -471,7 +522,6 @@
             </div>
         </div>
         <div class="category-card">
-
             <div class="category-name" style="color: var(--romance-pink);">感情篇</div>
             <div class="category-count">41 個藉口</div>
             <div class="category-tags">
@@ -480,7 +530,6 @@
             </div>
         </div>
         <div class="category-card">
-
             <div class="category-name" style="color: var(--secondary-text);">通用篇</div>
             <div class="category-count">40 個藉口</div>
             <div class="category-tags">
@@ -517,18 +566,18 @@
     <h2 class="section-title">試試看</h2>
     <p class="section-subtitle">點一下，隨機產生藉口</p>
 
-    <img id="demoDuck" class="demo-duck" src="images/duck_happy.png" alt="鴨">
+    <img id="demoDuckZh" class="demo-duck" src="images/duck_happy.png" alt="鴨">
 
-    <div class="demo-card" id="demoCard">
-        <div class="demo-excuse" id="demoExcuse">我家的掃地機器人傳了緊急通知說它卡住了，我得回去救它</div>
-        <div class="demo-message" id="demoMessage">欸不行我要先走了，我家掃地機器人剛傳通知說它卡在沙發底下出不來，上次卡了一整晚隔天電池就壞了，我得回去救它！</div>
+    <div class="demo-card" id="demoCardZh">
+        <div class="demo-excuse" id="demoExcuseZh">我家的掃地機器人傳了緊急通知說它卡住了，我得回去救它</div>
+        <div class="demo-message" id="demoMessageZh">欸不行我要先走了，我家掃地機器人剛傳通知說它卡在沙發底下出不來，上次卡了一整晚隔天電池就壞了，我得回去救它！</div>
         <div class="demo-meta">
-            <span class="demo-badge" id="demoBadge" style="background: var(--coral-red);">超級烤鴨</span>
-            <span class="demo-scenario" id="demoScenario">不想加班</span>
+            <span class="demo-badge" id="demoBadgeZh" style="background: var(--coral-red);">超級烤鴨</span>
+            <span class="demo-scenario" id="demoScenarioZh">不想加班</span>
         </div>
     </div>
 
-    <button class="demo-btn" id="demoBtn" onclick="randomExcuse()">🎲 換一個藉口</button>
+    <button class="demo-btn" onclick="randomExcuse('zh')">🎲 換一個藉口</button>
 </section>
 
 <!-- Features -->
@@ -582,16 +631,215 @@
 <footer>
     <img src="images/duck_sleep.png" alt="鴨" class="footer-duck">
     <div class="footer-links">
-        <a href="support.html">支援中心</a>
-        <a href="privacy-policy.html">隱私權政策</a>
-        <a href="terms-of-service.html">服務條款</a>
+        <a href="support.html?lang=zh">支援中心</a>
+        <a href="privacy-policy.html?lang=zh">隱私權政策</a>
+        <a href="terms-of-service.html?lang=zh">服務條款</a>
     </div>
     <p>&copy; 2026 Duckout 快逃鴨. All rights reserved.</p>
     <p style="margin-top: 8px; font-size: 12px;">本 App 所有藉口僅供娛樂用途，請勿用於不當目的</p>
 </footer>
 
+</div>
+
+<!-- ===== English ===== -->
+<div id="lang-en" class="lang-section">
+
+<!-- Hero -->
+<div class="hero">
+    <img src="images/duckout_happy_logo.png" alt="Duckout Logo" class="hero-logo">
+    <h1>Duckout</h1>
+    <p class="subtitle">Duck Out in Style</p>
+    <p class="tagline">Don't want to work overtime? Skip the dinner? Dodge the date?<br>Generate the perfect excuse with one tap</p>
+    <a href="#" class="app-store-btn">Coming Soon on App Store</a>
+</div>
+
+<!-- Duck parade -->
+<div class="duck-parade">
+    <img src="images/duck_happy.png" alt="Happy Duck">
+    <img src="images/duck_excited.png" alt="Excited Duck">
+    <img src="images/duck_wink.png" alt="Winking Duck">
+    <img src="images/duck_serious.png" alt="Serious Duck">
+    <img src="images/duck_question.png" alt="Confused Duck">
+    <img src="images/duck_shock.png" alt="Shocked Duck">
+    <img src="images/duck_cry.png" alt="Crying Duck">
+    <img src="images/duck_unhappy.png" alt="Unhappy Duck">
+    <img src="images/duck_sleep.png" alt="Sleepy Duck">
+</div>
+
+<!-- Stats -->
+<div class="stats">
+    <div class="stat">
+        <div class="stat-number">234</div>
+        <div class="stat-label">crafted excuses</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">5</div>
+        <div class="stat-label">categories</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">19</div>
+        <div class="stat-label">scenarios</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">3</div>
+        <div class="stat-label">credibility levels</div>
+    </div>
+</div>
+
+<!-- Categories -->
+<section>
+    <h2 class="section-title">Five Categories</h2>
+    <p class="section-subtitle">Whatever the situation, there's an excuse for it</p>
+
+    <div class="categories">
+        <div class="category-card">
+            <div class="category-name" style="color: var(--mint-green);">Work</div>
+            <div class="category-count">62 excuses</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--mint-green); color: #fff;">Skip overtime</span>
+                <span class="tag" style="background: var(--card-bg);">Dodge meetings</span>
+                <span class="tag" style="background: var(--card-bg);">Pass on group buys</span>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-name" style="color: var(--duck-yellow);">Social</div>
+            <div class="category-count">51 excuses</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--duck-yellow);">Skip dinner</span>
+                <span class="tag" style="background: var(--card-bg);">Stay home</span>
+                <span class="tag" style="background: var(--card-bg);">Dodge karaoke</span>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-name" style="color: var(--coral-red);">Family</div>
+            <div class="category-count">40 excuses</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--coral-red); color: #fff;">Skip family gatherings</span>
+                <span class="tag" style="background: var(--card-bg);">Avoid going home</span>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-name" style="color: var(--romance-pink);">Romance</div>
+            <div class="category-count">41 excuses</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--romance-pink); color: #fff;">Cancel dates</span>
+                <span class="tag" style="background: var(--card-bg);">Decline blind dates</span>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-name" style="color: var(--secondary-text);">General</div>
+            <div class="category-count">40 excuses</div>
+            <div class="category-tags">
+                <span class="tag" style="background: var(--secondary-text); color: #fff;">Late excuses</span>
+                <span class="tag" style="background: var(--card-bg);">Forgot to reply</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Credibility -->
+<section>
+    <h2 class="section-title">Three Credibility Levels</h2>
+    <p class="section-subtitle">From totally legit to hilariously absurd — pick your style</p>
+
+    <div class="cred-list">
+        <div class="cred-row">
+            <span class="cred-badge" style="background: var(--mint-green);">Legit</span>
+            <span class="cred-text">Solid reason — your boss would totally buy it</span>
+        </div>
+        <div class="cred-row">
+            <span class="cred-badge" style="background: var(--duck-yellow); color: var(--outline);">Sketchy</span>
+            <span class="cred-text">A bit suspicious, but hard to question</span>
+        </div>
+        <div class="cred-row">
+            <span class="cred-badge" style="background: var(--coral-red);">Ridiculous</span>
+            <span class="cred-text">So absurd it's funny — they'll forgive you laughing</span>
+        </div>
+    </div>
+</section>
+
+<!-- Demo -->
+<section class="demo-section">
+    <h2 class="section-title">Try It Out</h2>
+    <p class="section-subtitle">Tap to generate a random excuse</p>
+
+    <img id="demoDuckEn" class="demo-duck" src="images/duck_happy.png" alt="Duck">
+
+    <div class="demo-card" id="demoCardEn">
+        <div class="demo-excuse" id="demoExcuseEn">My robot vacuum just sent an emergency alert saying it's stuck — I need to go rescue it</div>
+        <div class="demo-message" id="demoMessageEn">Hey sorry I gotta run — my robot vacuum just sent a notification that it's stuck under the couch. Last time it was stuck all night and the battery died. I need to go save it!</div>
+        <div class="demo-meta">
+            <span class="demo-badge" id="demoBadgeEn" style="background: var(--coral-red);">Ridiculous</span>
+            <span class="demo-scenario" id="demoScenarioEn">Skip overtime</span>
+        </div>
+    </div>
+
+    <button class="demo-btn" onclick="randomExcuse('en')">🎲 Try Another</button>
+</section>
+
+<!-- Features -->
+<section>
+    <h2 class="section-title">Features</h2>
+    <p class="section-subtitle">Not just excuses — we help you say it right</p>
+
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <div class="feature-title">One-Tap Copy</div>
+            <div class="feature-desc">Copy excuses and message templates instantly to your chat</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎲</div>
+            <div class="feature-title">Random Generator</div>
+            <div class="feature-desc">Can't decide? Let the Duck of Destiny choose for you</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">❤️</div>
+            <div class="feature-title">Favorites</div>
+            <div class="feature-desc">Save your go-to excuses for quick access next time</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🖼️</div>
+            <div class="feature-title">Share Cards</div>
+            <div class="feature-desc">Generate beautiful excuse cards to share on social media</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <div class="feature-title">Excuse Calendar</div>
+            <div class="feature-desc">Track which excuses you've used — never get caught repeating</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">Fully Offline</div>
+            <div class="feature-desc">No internet needed, no data collected — your secret is safe</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align: center;">
+    <img src="images/duck_wink.png" alt="Duck" style="width: 80px; height: 80px; margin-bottom: 16px;">
+    <h2 class="section-title">Ready to Duck Out?</h2>
+    <p class="section-subtitle">Download Duckout and escape with style every time</p>
+    <a href="#" class="app-store-btn">Coming Soon on App Store</a>
+</section>
+
+<!-- Footer -->
+<footer>
+    <img src="images/duck_sleep.png" alt="Duck" class="footer-duck">
+    <div class="footer-links">
+        <a href="support.html?lang=en">Support</a>
+        <a href="privacy-policy.html?lang=en">Privacy Policy</a>
+        <a href="terms-of-service.html?lang=en">Terms of Service</a>
+    </div>
+    <p>&copy; 2026 Duckout. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 12px;">All excuses are for entertainment purposes only. Please use responsibly.</p>
+</footer>
+
+</div>
+
 <script>
-const excuses = [
+const excusesZh = [
     { excuse: "我家的掃地機器人傳了緊急通知說它卡住了，我得回去救它", message: "欸不行我要先走了，我家掃地機器人剛傳通知說它卡在沙發底下出不來，上次卡了一整晚隔天電池就壞了，我得回去救它！", cred: 3, scenario: "不想加班" },
     { excuse: "抱歉今天沒辦法加班，我預約了牙醫回診，已經改過兩次了不能再改了", message: "主管不好意思 🙏 今天真的沒辦法留下來加班，我預約了牙醫回診，已經改過兩次了，明天我會早點來把進度補上！", cred: 1, scenario: "不想加班" },
     { excuse: "不好意思今天身體不太舒服，可能是昨天吃壞肚子了，改天再約", message: "抱歉今天晚上去不了了 🙏 我從下午開始肚子就不太舒服，可能昨天吃到不乾淨的東西，改天身體好了再約！", cred: 1, scenario: "拒絕聚餐" },
@@ -606,6 +854,21 @@ const excuses = [
     { excuse: "我鄰居家的管線漏水滲到我家，師傅說今天一定要進我家檢查牆壁，不然樓下會告我", message: "主管不好意思 🙏 我家天花板在漏水，樓上鄰居約了水電師傅現在要來看，我得趕回去處理，不然怕淹到木地板，明天補進度！", cred: 2, scenario: "不想加班" },
 ];
 
+const excusesEn = [
+    { excuse: "My robot vacuum just sent an emergency alert saying it's stuck — I need to go rescue it", message: "Hey sorry I gotta run — my robot vacuum just sent a notification that it's stuck under the couch. Last time it was stuck all night and the battery died. I need to go save it!", cred: 3, scenario: "Skip overtime" },
+    { excuse: "Sorry, I can't stay late today — I have a dentist follow-up that's been rescheduled twice already", message: "Hey boss, sorry 🙏 I really can't stay late today — I have a dentist follow-up and I've already rescheduled it twice. I'll come in early tomorrow to catch up!", cred: 1, scenario: "Skip overtime" },
+    { excuse: "Sorry, I'm not feeling well today — might have eaten something bad yesterday", message: "Sorry, I can't make it tonight 🙏 My stomach's been acting up since this afternoon — probably ate something bad yesterday. Let's reschedule when I'm feeling better!", cred: 1, scenario: "Skip dinner" },
+    { excuse: "I just dropped my phone in the toilet — currently blow-drying it", message: "OMG I just dropped my phone in the toilet 😱 Currently blow-drying it, the touchscreen is barely working. I'll get back to you guys later!!", cred: 2, scenario: "Escape group chat" },
+    { excuse: "My company just scheduled me for weekend duty — I really can't get away", message: "Auntie, I'm so sorry 🙏 The company just assigned me weekend duty and my manager specifically requested me. I really can't take time off. I'll definitely make it to the next gathering!", cred: 1, scenario: "Skip family gathering" },
+    { excuse: "Work stress has been really getting to me — I need some alone time, it's not about you", message: "Sorry, I haven't been feeling great lately 😔 Work stress has been piling up and I need some quiet time to recharge. It's not that I don't want to see you — let's meet up once I feel better?", cred: 1, scenario: "Cancel date" },
+    { excuse: "There's a car accident on the road and traffic is completely stuck — it's not mine but I can't move", message: "Sorry I'm going to be late 🙏 There's an accident ahead and the whole road is jammed — completely stuck 🚗 Probably another 15-20 minutes. Really sorry!", cred: 1, scenario: "Late excuse" },
+    { excuse: "My cat is scheduled for surgery that day — I need to stay with her", message: "Sorry, I can't make it to the party 🙏 My cat has surgery scheduled that day and the vet said someone needs to stay with her afterward. Hope you all have a great time!", cred: 1, scenario: "Skip party" },
+    { excuse: "I'm doing intermittent fasting — no eating after 4 PM", message: "Thanks for the invite! But I'm trying intermittent fasting right now — no food after 4 PM. I'll pass this time. Let me know if there's a morning option next time!", cred: 2, scenario: "Pass on group buy" },
+    { excuse: "I just did a tarot reading on Instagram and it said I shouldn't have any flirty interactions today or Mercury retrograde will get me", message: "OK so you won't believe this 😂 I just drew a tarot card and it said if I flirt with anyone today I'll get hit by Mercury retrograde. I'm terrified. Staying home today!", cred: 3, scenario: "Dodge crush" },
+    { excuse: "Last time I ate from the group order I had a nightmare about being chased by food — now I get PTSD from order forms", message: "Don't include me 😂 Last group order's mille crepe cake gave me a nightmare about being chased by a giant cake. Now I get anxious just seeing the order form. You guys go ahead!", cred: 3, scenario: "Pass on group buy" },
+    { excuse: "My neighbor's pipes are leaking into my apartment — the plumber says he needs to check my walls today or the downstairs neighbor will sue", message: "Hey boss sorry 🙏 My ceiling is leaking — my upstairs neighbor's plumber is coming over now to check. I need to rush home before it damages the hardwood floors. I'll catch up tomorrow!", cred: 2, scenario: "Skip overtime" },
+];
+
 const duckImages = [
     "images/duck_happy.png", "images/duck_excited.png", "images/duck_wink.png",
     "images/duck_serious.png", "images/duck_question.png", "images/duck_shock.png",
@@ -613,28 +876,53 @@ const duckImages = [
 ];
 
 const credMap = {
-    1: { label: "合情合理", color: "var(--mint-green)" },
-    2: { label: "有點烤鴨", color: "var(--duck-yellow)" },
-    3: { label: "超級烤鴨", color: "var(--coral-red)" }
+    zh: { 1: { label: "合情合理", color: "var(--mint-green)" }, 2: { label: "有點烤鴨", color: "var(--duck-yellow)" }, 3: { label: "超級烤鴨", color: "var(--coral-red)" } },
+    en: { 1: { label: "Legit", color: "var(--mint-green)" }, 2: { label: "Sketchy", color: "var(--duck-yellow)" }, 3: { label: "Ridiculous", color: "var(--coral-red)" } }
 };
 
-function randomExcuse() {
-    const e = excuses[Math.floor(Math.random() * excuses.length)];
-    const c = credMap[e.cred];
+function randomExcuse(lang) {
+    var excuses = lang === 'en' ? excusesEn : excusesZh;
+    var suffix = lang === 'en' ? 'En' : 'Zh';
+    var e = excuses[Math.floor(Math.random() * excuses.length)];
+    var c = credMap[lang][e.cred];
 
-    document.getElementById("demoExcuse").textContent = e.excuse;
-    document.getElementById("demoMessage").textContent = e.message;
-    document.getElementById("demoBadge").textContent = c.label;
-    document.getElementById("demoBadge").style.background = c.color;
-    document.getElementById("demoBadge").style.color = e.cred === 2 ? "var(--outline)" : "#fff";
-    document.getElementById("demoScenario").textContent = e.scenario;
+    document.getElementById("demoExcuse" + suffix).textContent = e.excuse;
+    document.getElementById("demoMessage" + suffix).textContent = e.message;
+    document.getElementById("demoBadge" + suffix).textContent = c.label;
+    document.getElementById("demoBadge" + suffix).style.background = c.color;
+    document.getElementById("demoBadge" + suffix).style.color = e.cred === 2 ? "var(--outline)" : "#fff";
+    document.getElementById("demoScenario" + suffix).textContent = e.scenario;
 
-    const duck = duckImages[Math.floor(Math.random() * duckImages.length)];
-    const duckEl = document.getElementById("demoDuck");
+    var duck = duckImages[Math.floor(Math.random() * duckImages.length)];
+    var duckEl = document.getElementById("demoDuck" + suffix);
     duckEl.src = duck;
     duckEl.style.transform = "scale(1.2) rotate(-10deg)";
-    setTimeout(() => { duckEl.style.transform = "scale(1) rotate(0)"; }, 300);
+    setTimeout(function() { duckEl.style.transform = "scale(1) rotate(0)"; }, 300);
 }
+
+function getLang() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('lang') || 'zh';
+}
+
+function switchLang(lang) {
+    document.querySelectorAll('.lang-section').forEach(function(el) { el.classList.remove('active'); });
+    document.querySelectorAll('.lang-btn').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById('lang-' + lang).classList.add('active');
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        if (btn.getAttribute('onclick') === "switchLang('" + lang + "')") btn.classList.add('active');
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+    var url = new URL(window.location);
+    url.searchParams.set('lang', lang);
+    history.replaceState(null, '', url);
+}
+
+// Init language from URL param
+(function() {
+    var lang = getLang();
+    if (lang === 'en') switchLang('en');
+})();
 </script>
 
 </body>
